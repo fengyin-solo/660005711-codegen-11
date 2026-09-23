@@ -8,6 +8,7 @@
         </el-select>
         <el-button size="small" @click="store.loadVolume()" :loading="store.loading">载入影像</el-button>
         <span v-if="store.volumeData" class="dim-info">{{ store.volumeData.dimensions.join('×') }}</span>
+        <el-button size="small" type="primary" plain @click="screen.open()">📺 多视图大屏</el-button>
       </div>
     </header>
     <div class="main-grid" v-if="store.volumeData">
@@ -25,6 +26,7 @@
     <div class="loading-state" v-else-if="!store.loading">
       <div class="placeholder">选择预设并点击"载入影像"开始分析</div>
     </div>
+    <ScreenView />
   </div>
 </template>
 
@@ -33,8 +35,11 @@ import VolumeRenderer from './components/VolumeRenderer.vue'
 import MPRView from './components/MPRView.vue'
 import WindowControl from './components/WindowControl.vue'
 import ROIPanel from './components/ROIPanel.vue'
+import ScreenView from './components/ScreenView.vue'
 import { useImagingStore } from './store/imaging'
+import { useScreenStore } from './store/screen'
 const store = useImagingStore()
+const screen = useScreenStore()
 </script>
 
 <style>

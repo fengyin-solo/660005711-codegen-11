@@ -35,6 +35,28 @@ WINDOW_PRESETS = {
     "abdomen":  {"window": 400, "level": 40, "desc": "腹窗 (W400/L40)"},
 }
 
+# Mock study list for the multi-view reading screen (多视图阅片大屏)
+STUDIES = [
+    {"id": "CT-20260923-001", "patient": "张**", "modality": "CT", "bodyPart": "头颅",
+     "preset": "brain", "date": "2026-09-23", "description": "头颅CT平扫"},
+    {"id": "CT-20260923-002", "patient": "李**", "modality": "CT", "bodyPart": "胸部",
+     "preset": "chest", "date": "2026-09-23", "description": "胸部CT平扫"},
+    {"id": "CT-20260922-003", "patient": "王**", "modality": "CT", "bodyPart": "腹部",
+     "preset": "abdomen", "date": "2026-09-22", "description": "腹部CT平扫"},
+    {"id": "CT-20260922-004", "patient": "赵**", "modality": "CT", "bodyPart": "头颅",
+     "preset": "brain", "date": "2026-09-22", "description": "头颅CT复查"},
+    {"id": "CT-20260921-005", "patient": "陈**", "modality": "CT", "bodyPart": "胸部",
+     "preset": "chest", "date": "2026-09-21", "description": "胸部CT增强"},
+    {"id": "CT-20260921-006", "patient": "刘**", "modality": "CT", "bodyPart": "腹部",
+     "preset": "abdomen", "date": "2026-09-21", "description": "全腹部CT平扫+增强"},
+]
+
+
+@app.get("/api/studies")
+def list_studies():
+    """List available studies (检查列表) for mounting on the reading screen."""
+    return {"studies": STUDIES}
+
 
 def generate_volume(preset: str, w: int, h: int, d: int):
     """Generate synthetic CT-like volume"""
